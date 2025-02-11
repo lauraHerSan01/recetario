@@ -9,6 +9,19 @@ export const CategoriesAPIResponseSchema = z.object({
 })
 
 export const SearchFiltersSchema = z.object({
-    ingredients: z.string(),
+    ingredient: z.string(),
     category: z.string()
+})
+
+export const DrinkSchema = z.object({
+    idDrink: z.string(),
+    strDrink: z.string(),
+    strDrinkThumb: z.string()
+})
+
+
+export const RecipesApiResponseSchema = z.object({
+    drinks: z.array(
+        DrinkSchema
+    )
 })

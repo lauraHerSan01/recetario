@@ -7,7 +7,7 @@ export default function Header() {
     const isHome = useMemo(() => pathname === '/', [pathname]);
     
     const [searchFilters, setSearchFilters] = useState({
-        ingredients: '',
+        ingredient: '',
         category: ''
     });
 
