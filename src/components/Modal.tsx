@@ -7,6 +7,8 @@ export default function Modal() {
     const modal= useAppStore(state => state.modal)
     const closeModal = useAppStore(state => state.closeModal)
     const selectedRecipe = useAppStore(state => state.selectedRecipe)
+    const addFavorites = useAppStore(state => state.addFavorites)
+    const recipeExist= useAppStore(state => state.recipeExist)
 
     function renderIngredients(){
       const ingredients: JSX.Element[] = [];
@@ -75,8 +77,16 @@ export default function Modal() {
                     className= 'w-full p-2 bg-gray-400 hover:bg-gray-500 rounded text-white uppercase'
                     type="button">Cerrar</button>
                     <button 
+                    onClick={() => {
+                      addFavorites(selectedRecipe)
+                      closeModal()
+                    }}
                     className= 'w-full p-2 bg-orange-400 hover:bg-orange-500 rounded text-white uppercase'
-                    type="button">Agregar a favorito</button>
+                    type="button">{
+                      recipeExist(selectedRecipe.idDrink)?
+                      'Eliminar de':
+                      'Agregar a'
+                    }favoritos</button>
                   </div>
                 </Dialog.Panel>
             </Transition.Child>
