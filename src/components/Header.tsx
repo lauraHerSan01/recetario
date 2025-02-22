@@ -14,6 +14,7 @@ export default function Header() {
     const fetchCategories = useAppStore((state) => state.fetchCategories);
     const categories = useAppStore((state) => state.categories);
     const searchRecipes = useAppStore(state => state.searchRecipes);
+    const showNotification = useAppStore(state => state.showNotification);
 
     useEffect(() => {
         fetchCategories();
@@ -29,15 +30,18 @@ export default function Header() {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if(Object.values(searchFilters).includes('')) {
-            console.log('Debes llenar todo');
-            return;
+            showNotification({
+                text: 'Debes llenar todo',
+                error: true
+            })
+            return
         }
 
         searchRecipes(searchFilters)
     }
 
     return (
-      <header className={ isHome ? 'bg-header bg-cover' : 'bg-slate-800' }>
+      <header className={ isHome ? 'bg-header bg-cover' : 'bg-black' }>
           <div className="mx-auto container px-5 py-4">
               <div className="flex justify-between items-center">
                   <div>
@@ -47,13 +51,13 @@ export default function Header() {
                   <nav className="flex gap-4">
                     <NavLink 
                         className={({ isActive }) =>
-                            isActive ? 'text-orange-500 uppercase font-bold' : 'text-white uppercase font-bold'
+                            isActive ? 'text-pink-500 uppercase font-bold' : 'text-white uppercase font-bold'
                         }
                         to='/'> Home
                     </NavLink>
                     <NavLink 
                         className={({ isActive }) =>
-                            isActive ? 'text-orange-500 uppercase font-bold' : 'text-white uppercase font-bold'
+                            isActive ? 'text-cyan-400 uppercase font-bold' : 'text-white uppercase font-bold'
                         }
                         to='/favoritos'>Favoritos
                     </NavLink>
@@ -63,11 +67,11 @@ export default function Header() {
               {isHome && ( 
                 <form
                 onSubmit={handleSubmit}
-                className="md:w-1/2 2xl:w-1/3 bg-orange-400 my-32 p-10 rounded-lg shadow space-y-6">
+                className="md:w-1/3 2xl:w-1/6 bg-orange-100 my-40 p-10 rounded-lg shadow space-y-5">
                     <div className="space-y-4">
                         <label 
                             htmlFor="ingredient"
-                            className="block text-white uppercase font-extrabold text-lg">
+                            className="block text-black uppercase font-extrabold text-lg">
                             Nombre o Ingredientes
                         </label>
                         <input 
@@ -83,7 +87,7 @@ export default function Header() {
                     <div className="space-y-4">
                         <label 
                             htmlFor="category"
-                            className="block text-white uppercase font-extrabold text-lg">
+                            className="block text-black uppercase font-extrabold text-lg">
                             Categoría
                         </label>
                         <select 
@@ -106,7 +110,7 @@ export default function Header() {
                     </div>
                     <input 
                         type="submit"
-                        className="cursor-pointer bg-orange-800 hover:bg-orange-900 text-white font-extrabold w-full p-2 rounded-lg uppercase" 
+                        className="cursor-pointer bg-cyan-500 hover:bg-pink-600 text-white font-extrabold w-full p-2 rounded-lg uppercase" 
                         value="Buscar Recetas" 
                     />
                 </form>

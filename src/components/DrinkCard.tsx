@@ -14,7 +14,7 @@ export default function DrinkCard({ drink}:DrinkCardProps) {
             <img 
             src={drink.strDrinkThumb} 
             alt={'Imagen de ' + drink.strDrink}
-            className="hover:scale-50 transition-transform hover:rotate-3"
+            className="hover:scale-50 transition-transform hover:rotate-1"
              />
         </div>
         <div className="p-5">
@@ -24,7 +24,7 @@ export default function DrinkCard({ drink}:DrinkCardProps) {
             <button
                 type="button"
                 onClick={() => selectRecipe(drink.idDrink)}
-                className="bg-orange-400 hover:bg-orange-500 mt-5 w-full p-3 font-bold text-white text-lg"
+                className=" bg-cyan-500 hover:bg-pink-600 mt-5 w-full p-3 font-bold text-white text-lg"
                 >Ver Receta</button>
         </div>
     </div>
